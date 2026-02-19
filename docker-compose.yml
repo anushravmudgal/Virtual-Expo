@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. The Expo Database (Isolated from XAMPP's MySQL)
+  expo-db:
+    image: mysql:8.0
+    container_name: expo_mysql
+    restart: unless-stopped
+    ports:
+      - "3307:3306" # Exposes to your PC on 3307. XAMPP is safe on 3306.
+    environment:
+      MYSQL_ROOT_PASSWORD: expo_root_password
+      MYSQL_DATABASE: virtual_expo_db
+    volumes:
+      - expo_db_data:/var/lib/mysql
+
+  # 2. The Expo Backend (Java Spring Boot)
+  expo-backend:
+    build: ./backend # Assumes your Spring Boot code is in a folder named 'backend'
+    container_name: expo_springboot
+    restart: unless-stopped
+    ports:
+      - "8080:8080" # Accessible via http://<Static-IP>:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://expo-db:3306/virtual_expo_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=expo_root_password
+    depends_on:
+      - expo-db
+    volumes:
+      # CRITICAL: This allows your Java code to spin up student Docker containers!
+      - /var/run/docker.sock:/var/run/docker.sock 
+
+  # 3. The Expo Frontend (React or Angular)
+  expo-frontend:
+    build: ./frontend # Assumes your UI code is in a folder named 'frontend'
+    container_name: expo_ui
+    restart: unless-stopped
+    ports:
+      - "3000:80" # Accessible via http://<Static-IP>:3000
+    depends_on:
+      - expo-backend
+
+volumes:
+  expo_db_data: # Keeps your new database persistent
