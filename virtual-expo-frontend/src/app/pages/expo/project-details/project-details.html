@@ -1,0 +1,44 @@
+<div class="details-container" *ngIf="!isLoading && project">
+  
+  <header class="details-header">
+    <a routerLink="/expo/projects" class="back-link">← Back to Gallery</a>
+  </header>
+
+  <section class="project-hero">
+    <div class="hero-content">
+      <span class="team-badge">Team: {{ project.name }}</span>
+      <h1 class="project-title">{{ project.projectTitle }}</h1>
+      
+      <p class="project-description">
+        {{ project.projectDescription || 'A full-stack application developed by IMS Noida engineering students.' }}
+      </p>
+
+      <div class="action-buttons">
+        <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" class="btn primary-btn">🌍 View Live Deployment</a>
+        <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" class="btn secondary-btn">💻 View Source Code</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2>Meet the Developers</h2>
+    <div class="team-grid">
+      
+      <div class="member-card" *ngFor="let member of project.members">
+        <div class="member-header">
+          <img src="https://ui-avatars.com/api/?name={{ member.name || 'Student' }}&background=0f172a&color=fff" class="avatar">
+          <div>
+            <h3>{{ member.name || 'Student Developer' }}</h3>
+            <p class="role-text">{{ member.role || 'Full Stack Developer' }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="loading-state" *ngIf="isLoading">
+  <p>Loading project workspace...</p>
+</div>

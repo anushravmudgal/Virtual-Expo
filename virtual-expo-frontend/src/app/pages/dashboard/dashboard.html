@@ -1,0 +1,204 @@
+<div class="dashboard-container">
+  
+  <header class="dashboard-header">
+    <h1>IMS Noida Virtual Expo - Cockpit</h1>
+    <div class="header-actions">
+      <button class="tab-btn" [class.active]="activeTab === 'workspace'" (click)="switchTab('workspace')">Active Workspace</button>
+      <button class="tab-btn" [class.active]="activeTab === 'profile'" (click)="switchTab('profile')">My Profile</button>
+      <button class="logout-btn" routerLink="/login">Log Out</button>
+    </div>
+  </header>
+
+  <div *ngIf="activeTab === 'workspace'">
+    
+    <div class="workspace-view" *ngIf="myGroup">
+      <div class="workspace-header">
+        <h2>Team: {{ myGroup.name }}</h2>
+        <span class="badge">Active Workspace</span>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Submit Your Project</h3>
+          <p>Once you save your details, you can deploy your project directly to the IMS Docker cluster.</p>
+
+          <div class="form-group full-width">
+            <label>Project Title</label>
+            <input type="text" [(ngModel)]="projectTitle" placeholder="e.g., College ERP System">
+          </div>
+
+          <div class="form-group full-width">
+            <label>GitHub Repository URL</label>
+            <input type="url" [(ngModel)]="githubUrl" placeholder="https://github.com/your-username/repo">
+          </div>
+
+          <div class="form-group full-width">
+            <label>Project Description</label>
+            <textarea [(ngModel)]="projectDescription" rows="3" placeholder="Describe the tech stack and core features..."></textarea>
+          </div>
+
+          <button class="action-btn success-btn" (click)="submitProject()" style="margin-bottom: 25px;">
+            Save Project Details
+          </button>
+
+          <div class="deployment-panel" style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <h4 style="margin-top: 0; font-size: 15px; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+              🚀 IMS Cloud Deployment (Docker)
+            </h4>
+            
+            <div *ngIf="!myGroup?.liveUrl">
+              <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">Your project is saved but not yet running live.</p>
+              <button class="action-btn" style="background: #10b981; color: white; width: 100%;" (click)="triggerDeployment()">
+                Build & Deploy to IMS Cloud
+              </button>
+            </div>
+
+            <div *ngIf="myGroup?.liveUrl">
+              <p style="font-size: 13px; color: #15803d; font-weight: 600; margin-bottom: 5px;">✓ System Online</p>
+              <a [href]="myGroup.liveUrl" target="_blank" style="display: block; margin-bottom: 15px; color: #2563eb; font-size: 14px; text-decoration: underline;">
+                {{ myGroup.liveUrl }}
+              </a>
+              <button class="action-btn" style="background: #f59e0b; color: white; width: 100%;" (click)="triggerDeployment()">
+                🔄 Push Updates (Re-Deploy)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Team Roster</h3>
+          <ul class="team-list">
+            <li *ngFor="let member of myGroup.members">
+              <div class="member-info">
+                <strong>{{ member.name || 'Student' }}</strong>
+                <span>{{ member.email }}</span>
+              </div>
+              <span class="role-badge">{{ member.role || 'Member' }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid" *ngIf="!myGroup">
+      <div class="card">
+        <h2>Create a Team (or Work Solo)</h2>
+        <p>Before submitting a project, you need a workspace.</p>
+        
+        <div class="form-group">
+          <label>Team Name</label>
+          <input type="text" [(ngModel)]="newGroupName" placeholder="Enter team name">
+        </div>
+        
+        <div class="form-group">
+          <label>Your Role in the Project</label>
+          <select [(ngModel)]="newGroupRole">
+            <option value="Full Stack Developer">Full Stack Developer</option>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Backend Developer">Backend Developer</option>
+          </select>
+        </div>
+
+        <button class="action-btn" (click)="createGroup()">Create Workspace</button>
+      </div>
+
+      <div class="card">
+        <h2>Existing Teams</h2>
+        <p>Join an existing team if your partner already created one.</p>
+        
+        <div class="group-list" *ngIf="availableGroups.length > 0; else noGroups">
+          <div class="group-item" *ngFor="let group of availableGroups">
+            <div class="group-info">
+              <strong>{{ group.name }}</strong>
+              <span class="leader-badge">Leader ID: {{ group.leader.id | slice:0:8 }}...</span>
+            </div>
+            <button class="join-btn" (click)="joinGroup(group.id)">Join</button>
+          </div>
+        </div>
+        <ng-template #noGroups>
+          <p class="empty-state">No teams created yet. Be the first!</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="workspace-view" *ngIf="activeTab === 'profile'">
+    <div class="workspace-header">
+        <h2>Professional Portfolio</h2>
+        <span class="badge" style="background-color: #fce7f3; color: #be185d;">Public Recruiter View</span>
+      </div>
+  
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Update Your Details</h3>
+          
+          <div class="form-group full-width">
+            <label>Profile Photo URL</label>
+            <input type="url" [(ngModel)]="userProfile.photoUrl" placeholder="Link to a professional headshot">
+          </div>
+  
+          <div class="form-group full-width">
+            <label>Short Introduction</label>
+            <textarea [(ngModel)]="userProfile.introduction" rows="3" placeholder="I am a passionate developer..."></textarea>
+          </div>
+  
+          <div class="form-row">
+            <div class="form-group">
+              <label>Dream Job Profile</label>
+              <input type="text" [(ngModel)]="userProfile.dreamJobProfile">
+            </div>
+            <div class="form-group">
+              <label>Target Industry</label>
+              <input type="text" [(ngModel)]="userProfile.industry">
+            </div>
+          </div>
+  
+   <div class="form-group full-width" style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px dashed #cbd5e1;">
+            <label>Upload Official Resume (PDF only)</label>
+            
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+              <input type="file" (change)="onFileSelected($event)" accept=".pdf" style="flex: 1;">
+              <button class="action-btn" (click)="uploadResume()" [disabled]="!selectedFile">Upload File</button>
+            </div>
+            
+            <div *ngIf="userProfile.resumeUrl" style="margin-top: 10px; font-size: 13px; color: #15803d; display: flex; align-items: center; gap: 5px;">
+              <strong>✓ Resume is currently hosted on IMS Servers</strong> 
+              <a [href]="userProfile.resumeUrl" target="_blank" style="color: #2563eb; text-decoration: underline;">(View File)</a>
+            </div>
+          </div>
+  
+          <button class="action-btn success-btn" (click)="saveProfile()">Save Portfolio Settings</button>
+        </div>
+  
+        <div class="card">
+          <h3>Official Identity (Locked)</h3>
+          <p style="font-size: 12px; color: #6b7280; margin-bottom: 15px;">Contact admin to change these details.</p>
+          
+          <div class="form-group full-width">
+            <label>Full Name</label>
+            <input type="text" [value]="userProfile.username" disabled class="locked-input">
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Course</label>
+              <input type="text" [value]="userProfile.course" disabled class="locked-input">
+            </div>
+            <div class="form-group">
+              <label>Roll Number</label>
+              <input type="text" [value]="userProfile.rollNumber" disabled class="locked-input">
+            </div>
+          </div>
+  
+          <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e5e7eb;">
+          
+          <h3>Quick Links</h3>
+          <div class="form-group full-width">
+            <label>LinkedIn Profile</label>
+            <input type="url" [(ngModel)]="userProfile.linkedinUrl">
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>

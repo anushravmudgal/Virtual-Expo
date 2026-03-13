@@ -1,0 +1,185 @@
+.gallery-container {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Header Styles */
+.gallery-header {
+  background: white;
+  padding: 30px 50px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: #2563eb; }
+
+.gallery-header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #0f172a;
+}
+
+.gallery-header p {
+  margin: 8px 0 0 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Layout: Sidebar + Grid */
+.gallery-layout {
+  display: flex;
+  gap: 40px;
+  padding: 40px 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Filter Sidebar */
+.filter-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.filter-sidebar h3 {
+  margin-top: 0;
+  color: #1e293b;
+  font-size: 18px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-group { margin-bottom: 20px; }
+
+.filter-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.filter-group input,
+.filter-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: white;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Project Grid */
+.project-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  align-content: start;
+}
+
+/* Individual Cards */
+.project-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+.card-header { margin-bottom: 15px; }
+
+.course-badge {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.card-body { flex: 1; }
+
+.project-title {
+  font-size: 20px;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.team-name {
+  font-size: 14px;
+  color: #475569;
+  margin: 0 0 6px 0;
+  font-weight: 500;
+}
+
+.member-count {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 20px 0;
+}
+
+.card-footer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+  margin-top: auto;
+}
+
+.github-btn {
+  display: block;
+  text-align: center;
+  background: #f8fafc;
+  color: #0f172a;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.github-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  color: #64748b;
+  font-weight: 500;
+}

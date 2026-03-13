@@ -1,0 +1,206 @@
+.directory-container {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Header (Matches the Gallery style) */
+.directory-header {
+  background: white;
+  padding: 30px 50px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: #2563eb; }
+
+.directory-header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #0f172a;
+}
+
+.directory-header p {
+  margin: 8px 0 0 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Layout: Sidebar + Grid */
+.directory-layout {
+  display: flex;
+  gap: 40px;
+  padding: 40px 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Search Sidebar */
+.filter-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.filter-sidebar h3 {
+  margin-top: 0;
+  color: #1e293b;
+  font-size: 18px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.filter-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: white;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.filter-group input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Student Grid */
+.student-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  align-content: start;
+}
+
+/* Individual Talent Cards */
+.student-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+/* Profile Layout */
+.card-profile-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 15px;
+}
+
+.profile-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+}
+
+.student-name {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.student-course {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Card Information Details */
+.card-body {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.info-row {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.info-row strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Footer Buttons */
+.card-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.action-btn {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.linkedin-btn {
+  background: #f0f9ff;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+}
+
+.linkedin-btn:hover { background: #e0f2fe; }
+
+.resume-btn {
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.resume-btn:hover { background: #f1f5f9; }
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  color: #64748b;
+  font-weight: 500;
+}

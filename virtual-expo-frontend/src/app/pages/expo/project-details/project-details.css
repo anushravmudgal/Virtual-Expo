@@ -1,0 +1,133 @@
+.details-container {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: 'Inter', system-ui, sans-serif;
+  padding-bottom: 50px;
+}
+
+.details-header {
+  padding: 30px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: #2563eb; }
+
+/* Hero Section */
+.project-hero {
+  background: white;
+  padding: 60px 50px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.team-badge {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.project-title {
+  font-size: 42px;
+  color: #0f172a;
+  margin: 0 0 20px 0;
+}
+
+.project-description {
+  font-size: 18px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.primary-btn { background: #2563eb; color: white; }
+.primary-btn:hover { background: #1d4ed8; }
+
+.secondary-btn { background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; }
+.secondary-btn:hover { background: #f1f5f9; }
+
+/* Team Section */
+.team-section {
+  max-width: 1200px;
+  margin: 50px auto 0;
+  padding: 0 50px;
+}
+
+.team-section h2 {
+  font-size: 24px;
+  color: #0f172a;
+  margin-bottom: 30px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.member-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.member-card h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.role-text {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 100px;
+  color: #64748b;
+  font-size: 18px;
+}

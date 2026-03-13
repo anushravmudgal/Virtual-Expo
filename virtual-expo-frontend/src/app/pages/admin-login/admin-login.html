@@ -1,0 +1,35 @@
+<div class="admin-login-container">
+  <div class="login-card">
+    
+    <div class="card-header">
+      <div class="security-badge">🔒 Restricted Access</div>
+      <h1>IMS Noida Faculty Portal</h1>
+      <p>System Evaluation & Administration</p>
+    </div>
+
+    <div class="card-body">
+      <div class="error-banner" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-group">
+        <label>Official Email Address</label>
+        <input type="email" [(ngModel)]="email" placeholder="e.g., faculty@imsnoida.edu" (keyup.enter)="onAdminLogin()">
+      </div>
+
+      <div class="form-group">
+        <label>Admin Password</label>
+        <input type="password" [(ngModel)]="password" placeholder="••••••••" (keyup.enter)="onAdminLogin()">
+      </div>
+
+      <button class="login-btn" (click)="onAdminLogin()" [disabled]="isLoading">
+        {{ isLoading ? 'Authenticating...' : 'Secure Login' }}
+      </button>
+    </div>
+    
+    <div class="card-footer">
+      <a href="/" class="return-link">← Return to Public Expo</a>
+    </div>
+
+  </div>
+</div>

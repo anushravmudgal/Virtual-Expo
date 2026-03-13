@@ -1,0 +1,57 @@
+<div class="gallery-container">
+  
+  <header class="gallery-header">
+    <div class="header-content">
+      <a routerLink="/" class="back-link">← Back to Home</a>
+      <h1>Live Project Gallery</h1>
+      <p>Explore full-stack applications built by IMS Noida students.</p>
+    </div>
+  </header>
+
+  <div class="gallery-layout">
+    
+    <aside class="filter-sidebar">
+      <h3>Filters</h3>
+      
+      <div class="filter-group">
+        <label>Search Projects</label>
+        <input type="text" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="Search title or team...">
+      </div>
+
+      <div class="filter-group">
+        <label>Course</label>
+        <select [(ngModel)]="selectedCourse" (change)="applyFilters()">
+          <option value="All">All Courses</option>
+          <option value="BCA">BCA</option>
+          <option value="BBA">BBA</option>
+          <option value="MCA">MCA</option>
+        </select>
+      </div>
+    </aside>
+
+    <main class="project-grid">
+      <div class="project-card" *ngFor="let project of filteredProjects">
+        
+        <div class="card-header">
+          <span class="course-badge">{{ project.leader?.course || 'Student' }}</span>
+        </div>
+        
+        <div class="card-body">
+          <h2 class="project-title">{{ project.projectTitle }}</h2>
+          <p class="team-name">Team: {{ project.name }}</p>
+          <p class="member-count">{{ project.members?.length || 1 }} Contributors</p>
+        </div>
+        
+        <div class="card-footer">
+          <a [routerLink]="['/expo/projects', project.id]" class="github-btn">View Project Details</a>
+        </div>
+        
+      </div>
+      
+      <div class="empty-state" *ngIf="filteredProjects.length === 0">
+        <p>No projects match your current filters.</p>
+      </div>
+    </main>
+
+  </div>
+</div>

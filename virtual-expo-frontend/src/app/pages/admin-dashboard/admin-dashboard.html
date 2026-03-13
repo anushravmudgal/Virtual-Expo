@@ -1,0 +1,77 @@
+<div class="admin-container">
+  
+  <header class="admin-header">
+    <div>
+      <h1>Faculty Command Center</h1>
+      <p>Welcome back, <strong>{{ adminName }}</strong>. You are in safe mode.</p>
+    </div>
+    <button class="logout-btn" (click)="logout()">End Secure Session</button>
+  </header>
+
+  <div class="admin-tabs">
+    <button [class.active]="activeTab === 'students'" (click)="switchTab('students')">Manage Students</button>
+    <button [class.active]="activeTab === 'projects'" (click)="switchTab('projects')">Manage Projects</button>
+  </div>
+
+  <div class="admin-content">
+    
+    <div *ngIf="activeTab === 'students'" class="data-card">
+      <h2>Registered Users</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Profile Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of allStudents">
+            <td>{{ student.username }}</td>
+            <td>{{ student.email }}</td>
+            <td><span class="role-badge" [class.admin-badge]="student.role === 'ADMIN'">{{ student.role }}</span></td>
+            <td>
+              <span *ngIf="student.profileComplete" class="status success">Complete</span>
+              <span *ngIf="!student.profileComplete" class="status warning">Incomplete</span>
+            </td>
+            <td>
+              <button class="delete-btn" (click)="deleteStudent(student.id)" *ngIf="student.role !== 'ADMIN'">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="activeTab === 'projects'" class="data-card">
+      <h2>Active Workspaces</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Project Title</th>
+            <th>Team Name</th>
+            <th>GitHub URL</th>
+            <th>Members</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of allProjects">
+            <td><strong>{{ project.projectTitle || 'Pending...' }}</strong></td>
+            <td>{{ project.name }}</td>
+            <td>
+              <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank">View Repo</a>
+              <span *ngIf="!project.githubUrl" class="text-muted">Not Submitted</span>
+            </td>
+            <td>{{ project.members?.length || 0 }}</td>
+            <td>
+              <button class="delete-btn" (click)="deleteProject(project.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

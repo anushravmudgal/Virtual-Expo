@@ -1,0 +1,57 @@
+<div class="directory-container">
+  
+  <header class="directory-header">
+    <div class="header-content">
+      <a routerLink="/" class="back-link">← Back to Home</a>
+      <h1>IMS Talent Directory</h1>
+      <p>Discover our top engineering and IT students ready for the industry.</p>
+    </div>
+  </header>
+
+  <div class="directory-layout">
+    
+    <aside class="filter-sidebar">
+      <h3>Search Talent</h3>
+      <div class="filter-group">
+        <label>Search by Name or Skill</label>
+        <input type="text" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="e.g., Spring Boot, React...">
+      </div>
+    </aside>
+
+    <main class="student-grid">
+      <div class="student-card" *ngFor="let student of filteredStudents">
+        
+        <div class="card-profile-section">
+          <img [src]="student.photoUrl || 'https://ui-avatars.com/api/?name=' + student.username + '&background=0D8ABC&color=fff'" alt="Profile Photo" class="profile-photo">
+          <div>
+            <h2 class="student-name">{{ student.username }}</h2>
+            <p class="student-course">{{ student.course }} - Semester {{ student.semester }}</p>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="info-row" *ngIf="student.targetItDomain">
+            <strong>Target Domain:</strong> {{ student.targetItDomain }}
+          </div>
+          <div class="info-row" *ngIf="student.skills">
+            <strong>Top Skills:</strong> {{ student.skills }}
+          </div>
+          <div class="info-row" *ngIf="student.dreamJobProfile">
+            <strong>Dream Role:</strong> {{ student.dreamJobProfile }}
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <a *ngIf="student.linkedinUrl" [href]="student.linkedinUrl" target="_blank" class="action-btn linkedin-btn">LinkedIn</a>
+          <a *ngIf="student.resumeUrl" [href]="student.resumeUrl" target="_blank" class="action-btn resume-btn">View Resume</a>
+        </div>
+        
+      </div>
+      
+      <div class="empty-state" *ngIf="filteredStudents.length === 0">
+        <p>No students match your current search.</p>
+      </div>
+    </main>
+
+  </div>
+</div>
