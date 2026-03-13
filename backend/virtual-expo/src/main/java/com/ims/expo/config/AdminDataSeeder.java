@@ -23,13 +23,13 @@ public class AdminDataSeeder {
     public CommandLineRunner seedAdmins(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             // The default password for all new faculty accounts (they can change it later)
-            String defaultPassword = passwordEncoder.encode("IMSadmin2026!");
+            String defaultPassword = passwordEncoder.encode("");
 
             List<String[]> facultyList = List.of(
-                new String[]{"Anushrav Sir", "anushrav@imsnoida.edu"},
-                new String[]{"Anjali Ma'am", "anjali.pandey@imsnoida.edu"},
-                new String[]{"Dr. Ajay Gupta", "hodsoit@imsnoida.edu"},
-                new String[]{"Dr. Jyoti ma'am", "jyotikumari.soit@imsnoida.edu"}
+                new String[]{"", ""},
+                new String[]{"", ""},
+                new String[]{"", ""},
+                new String[]{"", ""}
             );
 
             for (String[] faculty : facultyList) {
